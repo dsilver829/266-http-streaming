@@ -1,19 +1,20 @@
 class ProjectsController < ApplicationController
+
   # GET /projects
   # GET /projects.json
   def index
     @projects = Project.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @projects }
+      format.html { render stream: true }
+      format.json { render json: @projects, stream: true }
     end
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project = Project.find(params[:id])
+    @project = Project.scoped
 
     respond_to do |format|
       format.html # show.html.erb
